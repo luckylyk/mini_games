@@ -1,6 +1,6 @@
-class DeminorStatus(object):
+class MineSweeperStatus(object):
     '''
-    Deminor game status
+    MineSweeper game status
     '''
     READY_TO_START = 0
     GAME_IN_PROGRESS = 1

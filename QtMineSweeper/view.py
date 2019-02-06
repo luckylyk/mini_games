@@ -1,10 +1,10 @@
 from PyQt4 import QtGui, QtCore
 from graphic import get_flag_polygon, get_flag_line, shrink_rect, get_cross_lines
 from core import FieldIndexStates
-from QtDeminor.core import DeminorStatus
+from QtMineSweeper.core import MineSweeperStatus
 
 
-class DeminorFieldView(QtGui.QWidget):
+class MineSweeperFieldView(QtGui.QWidget):
     openIndexRequested = QtCore.pyqtSignal(int, int)
     setNextMarkRequested = QtCore.pyqtSignal(int, int)
 
@@ -68,11 +68,11 @@ class DeminorFieldView(QtGui.QWidget):
 
         painter = QtGui.QPainter()
         painter.begin(self)
-        if self._model.current_status == DeminorStatus.GAME_IN_PROGRESS:
+        if self._model.current_status == MineSweeperStatus.GAME_IN_PROGRESS:
             self.paint(painter)
-        elif self._model.current_status == DeminorStatus.GAME_OVER_DEFEAT:
+        elif self._model.current_status == MineSweeperStatus.GAME_OVER_DEFEAT:
             self.paint_game_over(painter)
-        elif self._model.current_status == DeminorStatus.GAME_OVER_VICTORY:
+        elif self._model.current_status == MineSweeperStatus.GAME_OVER_VICTORY:
             self.paint_victory(painter)
         painter.end()
 

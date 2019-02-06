@@ -1,5 +1,5 @@
 
-class DeminorController():
+class MineSweeperController():
 
     def __init__(self, model, view, size, number_of_bombs):
         self.model = model

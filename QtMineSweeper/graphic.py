@@ -8,7 +8,7 @@ from PyQt4 import QtCore, QtGui
 def get_flag_polygon(rect):
     '''
     return a QPolygone triangle representing
-    the fabric part of the Deminor Flag
+    the fabric part of the MineSweeper Flag
     '''
     polygon_top = QtCore.QPoint(
         rect.left() + rect.width() // 3, rect.top() + (rect.height() // 12))
@@ -22,7 +22,7 @@ def get_flag_polygon(rect):
 
 def get_flag_line(rect):
     '''
-    return a QtCore.QLine representing the woodstick of the Deminor Flag
+    return a QtCore.QLine representing the woodstick of the MineSweeper Flag
     '''
     point_1 = QtCore.QPoint(
         rect.left() + rect.width() // 3, rect.top() + (rect.height() // 10))

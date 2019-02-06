@@ -1,33 +1,33 @@
 '''
-this module is an command version of the deminor game
+this module is an command version of the minesweeper game
 You can use this module completely independent of the controller and the model
-you can print the DeminorModel to se the current game state
+you can print the MineSweeperModel to se the current game state
 
 ---------------
  example usage
 ---------------
 
-from QtDeminor.model import DeminorModel
-from QtDeminor.core import FieldSize
+from QtMineSweeper.model import MineSweeperModel
+from QtMineSweeper.core import FieldSize
 
-deminor = DeminorModel()
-deminor.set_size(FieldSize(20, 13))
-deminor.set_bomb_number(25)
-deminor.initialize()
-deminor.start()
-deminor.open_index(3, 3)
-print(deminor)
+minesweeper = MineSweeperModel()
+minesweeper.set_size(FieldSize(20, 13))
+minesweeper.set_bomb_number(25)
+minesweeper.initialize()
+minesweeper.start()
+minesweeper.open_index(3, 3)
+print(minesweeper)
 
 '''
 
 
-from QtDeminor.core import FieldIndexStates, FieldSize, DeminorStatus
+from QtMineSweeper.core import FieldIndexStates, FieldSize, MineSweeperStatus
 from PyQt4 import QtCore
 import random
 import time
 
 
-class DeminorModel(object):
+class MineSweeperModel(object):
     '''
     Model of the game
     '''
@@ -37,7 +37,7 @@ class DeminorModel(object):
 
     def __init__(self):
         self._field_model = None
-        self._current_status = DeminorStatus.READY_TO_START
+        self._current_status = MineSweeperStatus.READY_TO_START
 
     def initialize(self):
         self._field_model = FieldModel(self.SIZE)
@@ -47,10 +47,10 @@ class DeminorModel(object):
 
     def reset(self):
         self.initialize()
-        self._current_status = DeminorStatus.READY_TO_START
+        self._current_status = MineSweeperStatus.READY_TO_START
 
     def start(self):
-        self._current_status = DeminorStatus.GAME_IN_PROGRESS
+        self._current_status = MineSweeperStatus.GAME_IN_PROGRESS
         self._field_model.set_random_bombs(self.BOMBS)
 
     def set_size(self, size):
@@ -64,15 +64,15 @@ class DeminorModel(object):
         self.BOMBS = value
 
     def open_index(self, row, col):
-        assert self._current_status == DeminorStatus.GAME_IN_PROGRESS
+        assert self._current_status == MineSweeperStatus.GAME_IN_PROGRESS
         index = self._field_model.find_index(row, col)
         index.open()
 
     def index_opened(self, content):
         if content == FieldIndexStates.BOMB:
-            self._current_status = DeminorStatus.GAME_OVER_DEFEAT
+            self._current_status = MineSweeperStatus.GAME_OVER_DEFEAT
         if self._field_model.is_finished():
-            self._current_status = DeminorStatus.GAME_OVER_VICTORY
+            self._current_status = MineSweeperStatus.GAME_OVER_VICTORY
 
     def indexes(self):
         return self._field_model.list()
@@ -83,7 +83,7 @@ class DeminorModel(object):
             index.set_next_mark()
 
     def finish(self):
-        self._current_status = DeminorStatus.GAME_OVER_VICTORY
+        self._current_status = MineSweeperStatus.GAME_OVER_VICTORY
 
     @property
     def current_status(self):
@@ -91,7 +91,7 @@ class DeminorModel(object):
 
     def __repr__(self):
         self._field_model.view()
-        return '<DeminorModel object>'
+        return '<MineSweeperModel object>'
 
 
 class FieldIndexModel(QtCore.QObject):
