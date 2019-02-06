@@ -10,3 +10,4 @@ class Ball(object):
         self.position = position
 
     def __iter__(self):
+        pass

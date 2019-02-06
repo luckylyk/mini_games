@@ -11,7 +11,6 @@ STYLE = {
     "pitch-midline-width": 3.0,
     "player-color": "white",
     "ball-color": "white",
-
 }
 
 
