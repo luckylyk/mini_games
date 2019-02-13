@@ -5,7 +5,7 @@ from PyQt5 import QtCore
 
 PLAYER_WIDTH_SCREEN_RATIO = .02
 PLAYER_HEIGHT_SCREEN_RATIO = .1
-BALL_SIZE_SCREEN_RATION = .02
+BALL_SIZE_SCREEN_RATIO = .01
 
 
 def get_playable_area(screen, player_number=0):
@@ -18,6 +18,19 @@ def get_playable_area(screen, player_number=0):
     return playable_area
 
 
+def get_start_position(screen, player=1):
+    y = screen.y()
+    offset = screen.width() / 10
+    x = screen.left() + offset if player == 1 else screen.right() - offset
+    return QtCore.QPointF(x, y)
+
+
+def extract_midline(screen):
+    return QtCore.QLine(
+        QtCore.QPoint(int(screen.center().x()), 0),
+        QtCore.QPoint(int(screen.center().x()), int(screen.height())))
+
+
 def get_player_rect(screen, position):
     width = screen.width() * PLAYER_WIDTH_SCREEN_RATIO
     height = screen.height() * PLAYER_HEIGHT_SCREEN_RATIO
@@ -27,7 +40,7 @@ def get_player_rect(screen, position):
 
 
 def get_ball_rect(screen, position):
-    radius = diagonal(screen) * BALL_SIZE_SCREEN_RATION
+    radius = diagonal(screen) * BALL_SIZE_SCREEN_RATIO
     rect = QtCore.QRectF(0, 0, radius, radius)
     rect.moveCenter(position)
     return rect

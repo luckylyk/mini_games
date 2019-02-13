@@ -6,8 +6,8 @@ from PyQt5 import QtGui
 STYLE = {
     "pitch-background": "black",
     "pitch-border-color": "white",
-    "pitch-border-width": 3.0,
-    "pitch-midline-color": "grey",
+    "pitch-border-width": 10,
+    "pitch-midline-color": "#777777",
     "pitch-midline-width": 3.0,
     "player-color": "white",
     "ball-color": "white",
@@ -16,7 +16,7 @@ STYLE = {
 
 def draw_pitch(painter, rect, midline=None, custom_style=None):
     style = STYLE.copy()
-    style.update(custom_style)
+    style.update(custom_style or {})
     pen = QtGui.QPen(QtGui.QColor(style["pitch-border-color"]))
     pen.setWidthF(style["pitch-border-width"])
     painter.setPen(pen)
@@ -40,7 +40,7 @@ def draw_player(painter, rect, custom_style=None):
 
 def draw_ball(painter, rect, custom_style=None):
     style = STYLE.copy()
-    style.update(custom_style)
+    style.update(custom_style or {})
     color = style["ball-color"]
     draw_rect_without_border(painter, rect, color)
 
